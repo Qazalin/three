@@ -8,7 +8,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        primary: ["var(--head-font)", "sans-serif"],
+        sans: ["var(--sans-font)", "sans-serif"],
+      },
+    },
   },
   plugins: [],
 };

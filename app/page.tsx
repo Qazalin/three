@@ -1,3 +1,8 @@
+import "./globals.css";
 export default function MainPage() {
-  return <div>hello world</div>;
+  return (
+    <div>
+      <p className="text-7xl font-primary">Leap to the Future</p>
+    </div>
+  );
 }
