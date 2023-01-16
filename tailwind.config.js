@@ -13,6 +13,9 @@ module.exports = {
         primary: ["var(--head-font)", "sans-serif"],
         sans: ["var(--sans-font)", "sans-serif"],
       },
+      colors: {
+        primary: "emerald",
+      },
     },
   },
   plugins: [],
