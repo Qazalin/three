@@ -1,8 +1,5 @@
-import {
-  ArrowLeftIcon,
-  BuildingLibraryIcon,
-  CircleStackIcon,
-} from "@heroicons/react/24/outline";
+import { BuildingLibraryIcon, CloudIcon } from "@heroicons/react/24/outline";
+import Link from "next/link";
 
 export default function Sidebar() {
   return (
@@ -10,8 +7,12 @@ export default function Sidebar() {
       <div className="space-x-5 flex w-full justify-between items-center">
         <div className="w-3 h-3 bg-zinc-500 rounded-full" />
         <div className="flex space-x-4">
-          <BuildingLibraryIcon className="w-5 h-5 text-zinc-400 cursor-pointer" />
-          <CircleStackIcon className="w-5 h-5 text-zinc-400" />
+          <Link href="/guild">
+            <BuildingLibraryIcon className="w-5 h-5 text-zinc-400 cursor-pointer" />
+          </Link>
+          <Link href="/cloud">
+            <CloudIcon className="w-5 h-5 text-zinc-400 cursor-pointer" />
+          </Link>
         </div>
       </div>
     </div>
