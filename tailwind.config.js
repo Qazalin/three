@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+const colors = require("tailwindcss/colors");
 module.exports = {
   darkMode: "class",
   content: [
@@ -10,11 +11,13 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        primary: ["var(--head-font)", "sans-serif"],
         sans: ["var(--sans-font)", "sans-serif"],
       },
       colors: {
         primary: "emerald",
+        secondary: "blue",
+        "secondary-text": colors.zinc[400],
+        "tertiary-text": colors.zinc[500],
       },
     },
   },

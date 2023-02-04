@@ -1,6 +1,5 @@
 import { Kodchasan, Open_Sans } from "@next/font/google";
 import classNames from "classnames";
-import Navbar from "./Navbar";
 
 const kodchasan = Kodchasan({
   weight: "400",
@@ -15,6 +14,8 @@ const openSans = Open_Sans({
 });
 
 export default function RootLayout({
+  // Layouts must accept a children prop.
+  // This will be populated with nested layouts or pages
   children,
 }: {
   children: React.ReactNode;
@@ -28,8 +29,8 @@ export default function RootLayout({
           "bg-black text-white"
         )}
       >
-        <Navbar />
-        <div className="mt-10 px-5">{children}</div>
+        {" "}
+        {children}
       </body>
     </html>
   );
