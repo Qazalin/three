@@ -18,13 +18,9 @@ const FLOOR_PADDING = 0.2;
 
 const HOUSE_DIMENSIONS = {
   depth: 2,
-  width: 1,
+  width: 1.5,
   height: 2,
 };
-
-const box = new THREE.BoxGeometry();
-const cyl = new THREE.CylinderGeometry(1, 1, 2, 20);
-const tri = new THREE.CylinderGeometry(1, 1, 2, 3);
 
 function getArgs(dims: Dimension): [number, number, number] {
   return [dims.depth, dims.width, dims.height];
@@ -54,31 +50,87 @@ const House: CustomMesh = (props) => {
   return (
     <mesh receiveShadow castShadow {...props}>
       <Geometry ref={csg} computeVertexNormals useGroups>
-        <Base name="base">
-          <boxGeometry args={getArgs(HOUSE_DIMENSIONS)} />
-          <meshStandardMaterial color="#949599" />
-        </Base>
-        <Subtraction name="cavity">
-          <boxGeometry
-            args={[
-              HOUSE_DIMENSIONS.depth / 2,
-              HOUSE_DIMENSIONS.width / 2,
-              HOUSE_DIMENSIONS.height / 2,
-            ]}
-          />
+        <BaseArea />
+        <BalconyArea />
+        <RooftopArea />
+        <Window position={[0.8, -1, -0.4]} />
+        <Window position={[0.8, -1, 0.1]} />
+        <Subtraction name="door" position={[0, 0, 0.5]}>
+          <boxGeometry args={[1.6, 1, 1]} />
+          <meshStandardMaterial color="#6A6B6E" />
         </Subtraction>
-        <Addition name="balcony" position={[0.3, 0, -1]}>
-          <boxGeometry args={[0.2, 1.8, 1]} />
-          <meshStandardMaterial color="#9F8460" />
-        </Addition>
-        <Addition name="balcony" position={[-0.3, 0, -1]}>
-          <boxGeometry args={[0.2, 2.3, 1.5]} />
-          <meshStandardMaterial color="#625A50" />
-        </Addition>
+        <EntranceDoor />
       </Geometry>
     </mesh>
   );
 };
+
+function BaseArea() {
+  return (
+    <>
+      <Base name="base">
+        <boxGeometry args={getArgs(HOUSE_DIMENSIONS)} />
+        <meshStandardMaterial color="#949599" />
+      </Base>
+      <Subtraction name="cavity">
+        <boxGeometry
+          args={[
+            HOUSE_DIMENSIONS.depth / 2,
+            HOUSE_DIMENSIONS.width / 2,
+            HOUSE_DIMENSIONS.height / 2,
+          ]}
+        />
+        <meshStandardMaterial color="#35363A" />
+      </Subtraction>
+    </>
+  );
+}
+
+function EntranceDoor() {
+  return (
+    <Subtraction name="door" position={[-0.699, -0.5, 0.5]}>
+      <boxGeometry args={[0.6, 1, 0.4]} />
+      <meshStandardMaterial color="#6A6B6E" />
+    </Subtraction>
+  );
+}
+
+function BalconyArea() {
+  return (
+    <>
+      <Addition name="balcony" position={[0.3, 0, -1]}>
+        <boxGeometry args={[0.2, 1.8, 1]} />
+        <meshStandardMaterial color="#9F8460" />
+      </Addition>
+      <Subtraction name="door" position={[0, 0, -0.7]}>
+        <boxGeometry args={[0.6, 1, 0.4]} />
+        <meshStandardMaterial color="#6A6B6E" />
+      </Subtraction>
+      <Addition name="balcony" position={[-0.3, 0, -1]}>
+        <boxGeometry args={[0.2, 2.3, 1.5]} />
+        <meshStandardMaterial color="#625A50" />
+      </Addition>
+    </>
+  );
+}
+
+function RooftopArea() {
+  return (
+    <>
+      <Subtraction name="roof" position={[1, 0, -0.1]}>
+        <boxGeometry args={[0.8, 0.6, 1.4]} />
+        <meshStandardMaterial color="#6A6B6E" />
+      </Subtraction>
+    </>
+  );
+}
+
+const Window = (props) => (
+  <Subtraction name="window" {...props}>
+    <boxGeometry args={[0.2, 2, 0.4]} />
+    <meshStandardMaterial color="#6A6B6E" />
+  </Subtraction>
+);
 
 const Tree: CustomMesh = (props) => {
   return (
