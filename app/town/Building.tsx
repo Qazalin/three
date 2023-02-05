@@ -1,6 +1,7 @@
 import { Geometry, Base, Subtraction, Addition } from "@react-three/csg";
 import { MeshProps } from "@react-three/fiber";
 import React, { useRef } from "react";
+import { blue, indigo, sky } from "tailwindcss/colors";
 import * as THREE from "three";
 import { Setup } from "./Setup";
 
@@ -52,18 +53,49 @@ const House: CustomMesh = (props) => {
       <Geometry ref={csg} computeVertexNormals useGroups>
         <BaseArea />
         <BalconyArea />
-        <RooftopArea />
-        <Window position={[0.8, -1, -0.4]} />
-        <Window position={[0.8, -1, 0.1]} />
-        <Subtraction name="door" position={[0, 0, 0.5]}>
-          <boxGeometry args={[1.6, 1, 1]} />
-          <meshStandardMaterial color="#6A6B6E" />
-        </Subtraction>
+        <Window position={[0.8, -1, -0.6]} />
+        <Window position={[0.8, -1, -0.1]} />
+        <FrontSpace />
         <EntranceDoor />
       </Geometry>
     </mesh>
   );
 };
+
+function FrontSpace() {
+  return (
+    <>
+      <Subtraction name="space" position={[0, 0, 0.5]}>
+        <boxGeometry args={[1.6, 1, 1]} />
+        <meshStandardMaterial color="#6A6B6E" />
+      </Subtraction>
+      <Addition name="window" position={[0, 0, 0.5]}>
+        <boxGeometry args={[1.6, 1, 0.5]} />
+        <meshStandardMaterial color={blue[300]} />
+      </Addition>
+      <Addition name="bounds" position={[0.75, 0, 0.7]}>
+        <boxGeometry args={[0.1, 1, 0.1]} />
+        <meshStandardMaterial color="#949599" />
+      </Addition>
+      <Addition name="bounds" position={[-0.75, 0, 0.7]}>
+        <boxGeometry args={[0.1, 1, 0.1]} />
+        <meshStandardMaterial color="#949599" />
+      </Addition>
+      <Addition name="bounds" position={[0, 0.45, 0.7]}>
+        <boxGeometry args={[1.6, 0.1, 0.1]} />
+        <meshStandardMaterial color="#949599" />
+      </Addition>
+      <Addition name="bounds" position={[0, -0.45, 0.7]}>
+        <boxGeometry args={[1.6, 0.1, 0.1]} />
+        <meshStandardMaterial color="#949599" />
+      </Addition>
+      <Addition name="bounds" position={[0, 0, 0.7]}>
+        <boxGeometry args={[0.2, 1, 0.1]} />
+        <meshStandardMaterial color="#949599" />
+      </Addition>
+    </>
+  );
+}
 
 function BaseArea() {
   return (
@@ -89,7 +121,7 @@ function BaseArea() {
 function EntranceDoor() {
   return (
     <Subtraction name="door" position={[-0.699, -0.5, 0.5]}>
-      <boxGeometry args={[0.6, 1, 0.4]} />
+      <boxGeometry args={[0.6, 2, 0.3]} />
       <meshStandardMaterial color="#6A6B6E" />
     </Subtraction>
   );
@@ -110,17 +142,6 @@ function BalconyArea() {
         <boxGeometry args={[0.2, 2.3, 1.5]} />
         <meshStandardMaterial color="#625A50" />
       </Addition>
-    </>
-  );
-}
-
-function RooftopArea() {
-  return (
-    <>
-      <Subtraction name="roof" position={[1, 0, -0.1]}>
-        <boxGeometry args={[0.8, 0.6, 1.4]} />
-        <meshStandardMaterial color="#6A6B6E" />
-      </Subtraction>
     </>
   );
 }
