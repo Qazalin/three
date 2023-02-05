@@ -31,6 +31,7 @@ export default function SanFrancisco() {
     <Setup>
       <House rotation={[0, 0, Math.PI / 2]} position={[0, 1, 0]} />
       <Floor />
+      <Tree position={[-1, 0.1, 3]} rotation={[0, 0, Math.PI / 2]} />
     </Setup>
   );
 }
