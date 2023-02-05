@@ -1,3 +1,4 @@
+import "./globals.css";
 export default function App() {
-  return <div>app</div>;
+  return <div className="bg-black w-screen h-screen">nothing here yet</div>;
 }
