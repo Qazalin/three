@@ -3,6 +3,7 @@ import { Vector3 } from "three";
 import { Canvas, Props as CanvasProps } from "@react-three/fiber";
 import { Bounds } from "@react-three/drei";
 import { OrbitControls } from "@react-three/drei";
+import SanFrancisco from "./Building";
 
 type Props = React.PropsWithChildren<
   CanvasProps & {
@@ -28,17 +29,21 @@ export const Setup = ({
     camera={{ position: [0, 0, 10], zoom: 200 }}
     {...restProps}
   >
-    <group rotation={[Math.PI / 5, -Math.PI / 5, Math.PI / 2]}>
-      <Bounds fit clip observe margin={1.25}>
-        {children}
-        {lights && (
-          <>
-            <ambientLight intensity={0.8} />
-            <pointLight intensity={1} position={[0, 6, 0]} />
-          </>
-        )}
-      </Bounds>
+    <gridHelper />
+    {lights && (
+      <>
+        <ambientLight intensity={0.8} />
+        <pointLight intensity={1} position={[0, 6, 0]} />
+      </>
+    )}
+    <axesHelper scale={[5, 5, 5]} />
+    <group rotation={[10 * (Math.PI / 180), -30 * (Math.PI / 180), 0]}>
+      {children}
     </group>
-    {controls && <OrbitControls />}
+    <OrbitControls
+      maxZoom={1000}
+      minPolarAngle={Math.PI / 2}
+      maxPolarAngle={Math.PI / 2}
+    />
   </Canvas>
 );

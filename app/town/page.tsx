@@ -8,7 +8,7 @@ import { Vector3 } from "three";
 
 export default function Page() {
   return (
-    <div className="w-screen h-screen bg-white">
+    <div className="w-screen h-screen bg-zinc-900">
       <SanFransicso />
     </div>
   );
