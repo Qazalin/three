@@ -13,6 +13,13 @@ export default function House(props) {
       <Geometry ref={csg} computeVertexNormals>
         <Base name="base" geometry={box} scale={[3, 3, 3]} />
         <Subtraction name="cavity" geometry={box} scale={[2.7, 2.7, 2.7]} />
+        <Addition
+          name="roof"
+          geometry={tri}
+          scale={[2.5, 1.5, 1.425]}
+          rotation={[-Math.PI / 2, 0, 0]}
+          position={[0, 2.2, 0]}
+        />
       </Geometry>
     </mesh>
   );

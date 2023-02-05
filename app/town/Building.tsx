@@ -2,6 +2,7 @@ import { Geometry, Base, Subtraction, Addition } from "@react-three/csg";
 import { MeshProps } from "@react-three/fiber";
 import React, { useRef } from "react";
 import * as THREE from "three";
+import { Setup } from "./Setup";
 
 type Dimension = {
   depth: number;
@@ -32,17 +33,9 @@ function getArgs(dims: Dimension): [number, number, number] {
 type CustomMesh = React.FC<MeshProps>;
 export default function SanFrancisco() {
   return (
-    <>
-      <House position={[1.05, FLOOR_DIMENSIONS.width / 4 - FLOOR_PADDING, 0]} />
-      <Tree
-        position={[
-          0.15,
-          FLOOR_DIMENSIONS.width / 2 - FLOOR_PADDING,
-          HOUSE_DIMENSIONS.depth - FLOOR_PADDING,
-        ]}
-      />
-      <Floor position={[0, 0, 0]} />
-    </>
+    <Setup>
+      <House />
+    </Setup>
   );
 }
 
@@ -60,19 +53,28 @@ const House: CustomMesh = (props) => {
 
   return (
     <mesh receiveShadow castShadow {...props}>
-      <Geometry ref={csg} computeVertexNormals>
-        <Base
-          name="base"
-          geometry={
-            new THREE.BoxGeometry(
-              HOUSE_DIMENSIONS.depth,
-              HOUSE_DIMENSIONS.width,
-              HOUSE_DIMENSIONS.height
-            )
-          }
-          scale={[3, 3, 3]}
-        />
-        <meshBasicMaterial color="#9A9B9F" />
+      <Geometry ref={csg} computeVertexNormals useGroups>
+        <Base name="base">
+          <boxGeometry args={getArgs(HOUSE_DIMENSIONS)} />
+          <meshStandardMaterial color="#949599" />
+        </Base>
+        <Subtraction name="cavity">
+          <boxGeometry
+            args={[
+              HOUSE_DIMENSIONS.depth / 2,
+              HOUSE_DIMENSIONS.width / 2,
+              HOUSE_DIMENSIONS.height / 2,
+            ]}
+          />
+        </Subtraction>
+        <Addition name="balcony" position={[0.3, 0, -1]}>
+          <boxGeometry args={[0.2, 1.8, 1]} />
+          <meshStandardMaterial color="#9F8460" />
+        </Addition>
+        <Addition name="balcony" position={[-0.3, 0, -1]}>
+          <boxGeometry args={[0.2, 2.3, 1.5]} />
+          <meshStandardMaterial color="#625A50" />
+        </Addition>
       </Geometry>
     </mesh>
   );
