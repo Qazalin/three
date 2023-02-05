@@ -2,12 +2,23 @@ import * as THREE from "three";
 import { useRef } from "react";
 import { PivotControls } from "@react-three/drei";
 import { Geometry, Base, Subtraction, Addition } from "@react-three/csg";
-
 const box = new THREE.BoxGeometry();
 const cyl = new THREE.CylinderGeometry(1, 1, 2, 20);
 const tri = new THREE.CylinderGeometry(1, 1, 2, 3);
 
 export default function House(props) {
+  const csg = useRef();
+  return (
+    <mesh receiveShadow castShadow {...props}>
+      <Geometry ref={csg} computeVertexNormals>
+        <Base name="base" geometry={box} scale={[3, 3, 3]} />
+        <Subtraction name="cavity" geometry={box} scale={[2.7, 2.7, 2.7]} />
+      </Geometry>
+    </mesh>
+  );
+}
+
+function Main() {
   const csg = useRef();
   return (
     <mesh receiveShadow castShadow {...props}>
