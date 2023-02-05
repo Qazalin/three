@@ -1,15 +1,10 @@
-"use client";
-
 import "../globals.css";
-import { Canvas } from "@react-three/fiber";
-import { OrbitControls } from "@react-three/drei";
-import SanFransicso from "./Building";
-import { Vector3 } from "three";
+import Building from "./Building";
 
 export default function Page() {
   return (
     <div className="w-screen h-screen bg-zinc-900">
-      <SanFransicso />
+      <Building />
     </div>
   );
 }

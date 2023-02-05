@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Geometry,
   Base,
@@ -7,7 +9,7 @@ import {
 } from "@react-three/csg";
 import { MeshProps } from "@react-three/fiber";
 import React, { useRef } from "react";
-import { blue, emerald, green, stone } from "tailwindcss/colors";
+import { blue, stone } from "tailwindcss/colors";
 import { Setup } from "./Setup";
 
 type Dimension = {
@@ -25,9 +27,6 @@ const HOUSE_DIMENSIONS = {
   depth: 2,
   width: 1.5,
   height: 2,
-};
-const colors = {
-  grass: "#5C7C41",
 };
 
 const grassShades = {
@@ -64,7 +63,7 @@ function getArgs(dims: Dimension): [number, number, number] {
 }
 
 type CustomMesh = React.FC<MeshProps>;
-export default function SanFrancisco() {
+export default function Building() {
   return (
     <Setup>
       <House rotation={[0, 0, Math.PI / 2]} position={[0, 1, 0]} />
