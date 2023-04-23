@@ -9,6 +9,7 @@
     "@fontsource/philosopher": "^4.5.11",
     "@heroicons/react": "^2.0.13",
     "@next/font": "^13.1.1",
+    "@radix-ui/colors": "^0.1.8",
     "@react-three/csg": "^2.0.7",
     "@react-three/drei": "^9.56.12",
     "@react-three/fiber": "^8.10.1",
